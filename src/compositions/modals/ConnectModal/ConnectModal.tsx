@@ -15,11 +15,11 @@ const connectorsByName: { [connectorName in ConnectorNames]: { icon: IconName, t
     title: 'Metamask',
     connector: ConnectorNames.Injected,
   },
-  // [ConnectorNames.WalletConnect]: {
-  //   icon: 'wallets/walletconnect',
-  //   title: 'WalletConnect',
-  //   connector: ConnectorNames.WalletConnect,
-  // },
+  [ConnectorNames.WalletConnect]: {
+    icon: 'wallets/walletconnect',
+    title: 'WalletConnect',
+    connector: ConnectorNames.WalletConnect,
+  },
 }
 
 type ButtonProps = {
