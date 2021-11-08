@@ -1,0 +1,100 @@
+{
+  "extends": [
+    "next",
+    "next/core-web-vitals",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/recommended"
+  ],
+  "plugins": [
+    "import",
+    "@typescript-eslint"
+  ],
+  "ignorePatterns": ["*.js"],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+
+    // NextJS
+
+    "@next/next/no-sync-scripts": "off",
+    "@next/next/no-css-tags": "off",
+    "@next/next/no-img-element": "off",
+
+    // Common
+
+    "curly": "off",
+    "indent": [ "error", 2 ],
+    "quotes": [ "error", "single" ],
+    "brace-style": [ "error", "stroustrup" ],
+    "prefer-const": "off",
+    "no-trailing-spaces": 1,
+    "semi": [ "error", "never" ],
+    "max-len": "off", // [ "error", { "code": 160 } ],
+    "object-curly-spacing": [ "error", "always" ],
+    "array-bracket-spacing": [ "error", "always" ],
+    "no-multiple-empty-lines": [ "error", { "max": 2 } ],
+    "comma-spacing": "warn",
+    "comma-dangle": [
+      "error", {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "never"
+      }
+    ],
+    "keyword-spacing": "error",
+
+    // React
+
+    "react/display-name": "off",
+    "react/jsx-tag-spacing": [ "error", {
+      "closingSlash": "never",
+      "beforeSelfClosing": "always",
+      "afterOpening": "never",
+      "beforeClosing": "allow"
+    } ],
+   "react/jsx-curly-newline": [ "error", {
+     "multiline": "require",
+     "singleline": "consistent"
+   } ],
+
+    // React hooks plugin
+
+    "react/no-unescaped-entities": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "off",
+
+    // Import plugin
+
+    "import/first": 0,
+    "import/extensions": 0,
+    "import/no-unresolved": 0,
+    "import/no-dynamic-require": 0,
+    "import/prefer-default-export": 0,
+    "import/no-webpack-loader-syntax": 0,
+    "import/no-named-as-default-member": 1,
+    "import/no-extraneous-dependencies": 0,
+    "import/no-anonymous-default-export": 0,
+    "import/newline-after-import": [ "error", { "count": 2 } ],
+
+    // typescript
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/no-unsafe-return": "warn",
+    "@typescript-eslint/no-for-in-array": "error",
+    "@typescript-eslint/await-thenable": "warn",
+    "@typescript-eslint/no-misused-promises": "warn",
+    "@typescript-eslint/restrict-plus-operands": "error",
+    "@typescript-eslint/naming-convention": [
+           "warn",
+          {
+            "selector": "variable",
+            "types": ["boolean"],
+            "format": ["PascalCase"],
+            "prefix": ["is", "should", "has", "can", "did", "will"]
+          }
+    ]
+  }
+}
