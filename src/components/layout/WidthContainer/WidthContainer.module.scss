@@ -1,0 +1,43 @@
+.widthContainer {
+  box-sizing: content-box;
+}
+
+
+@include mobile {
+
+  .widthContainer {
+    padding-right: 10rem;
+    padding-left: 10rem;
+  }
+}
+
+@include except-mobile {
+
+  .widthContainer {
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 32rem;
+    padding-left: 32rem;
+  }
+}
+
+@include tablet-portrait {
+
+  .widthContainer {
+    max-width: 600rem;
+  }
+}
+
+@include tablet-landscape {
+
+  .widthContainer {
+    max-width: 1024rem;
+  }
+}
+
+@include desktop {
+
+  .widthContainer {
+    max-width: 1232rem;
+  }
+}
