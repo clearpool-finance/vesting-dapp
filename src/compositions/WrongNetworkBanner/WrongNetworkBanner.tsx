@@ -7,14 +7,14 @@ import s from './WrongNetworkBanner.module.scss'
 
 const getNetworkName = (chainId: number) => {
   switch (chainId) {
-  case 1:
-    return 'Etherium'
-  case 4:
-    return 'Rinkeby'
-  case 42: 
-    return 'Kovan'
-  default:
-    return 'Unknown'
+    case 1:
+      return 'Mainnet'
+    case 4:
+      return 'Rinkeby'
+    case 42:
+      return 'Kovan'
+    default:
+      return 'Unknown'
   }
 }
 
