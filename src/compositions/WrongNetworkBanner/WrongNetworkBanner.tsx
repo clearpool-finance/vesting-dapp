@@ -25,12 +25,10 @@ const WrongNetworkBanner = () => {
 
   return (
     <div className={s.wrongNetwork}>
-      <WidthContainer>
-        <div className="flex items-center">
-          <span>{
-            `App network (${getNetworkName(chainId)}) doesn’t match to network selected in wallet. Please change network in your wallet to ${getNetworkName(requiredChainId)}`
-          }</span>
-        </div>
+      <WidthContainer className="flex items-center">
+        {
+          `App network (${getNetworkName(chainId)}) doesn’t match to network selected in wallet. Please change network in your wallet to ${getNetworkName(requiredChainId)}`
+        }
       </WidthContainer>
     </div>
   )
