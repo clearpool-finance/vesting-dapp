@@ -54,7 +54,7 @@ const ClaimButton = ({ contractName, availableToClaim, onClaim }) => {
   )
 }
 
-const Vesting = ({ isFetching, data, withDates, onClaim }) => {
+const Vesting = ({ isFetching, data, withDates }) => {
   const { startDate, cliffDate, endDate } = data || {}
 
   return (
@@ -71,7 +71,7 @@ const Vesting = ({ isFetching, data, withDates, onClaim }) => {
           </div>
         )
       }
-      <Stats isFetching={isFetching} data={data} onClaim={onClaim} />
+      <Stats isFetching={isFetching} data={data} />
     </div>
   )
 }
@@ -88,7 +88,6 @@ const AutoVesting = ({ isFetching, blocks, onClaim }) => {
             isFetching={isFetching}
             data={autoData}
             withDates={index === 0}
-            onClaim={onClaim}
           />
         ))
       }
