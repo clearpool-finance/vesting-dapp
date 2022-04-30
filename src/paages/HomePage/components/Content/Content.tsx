@@ -10,7 +10,7 @@ import s from './Content.module.scss'
 
 
 const Balance = () => {
-  const [ { isFetching, balance }, setState ] = useReducerState({ isFetching: true, balance: null })
+  const [ { isFetching, balance, vested }, setState ] = useReducerState({ isFetching: true, balance: null, vested: null })
 
   const fetch = async () => {
     const cpoolContract = getContract('cpool')
@@ -23,7 +23,8 @@ const Balance = () => {
 
     setState({
       isFetching: false,
-      balance: parseFloat(parseFloat(formatUnits(balance.sub(totalVest), 18)).toFixed(4)),
+      balance: parseFloat(parseFloat(formatUnits(balance, 18)).toFixed(4)),
+      vested: parseFloat(parseFloat(formatUnits(totalVest, 18)).toFixed(4)),
     })
   }
 
@@ -34,12 +35,22 @@ const Balance = () => {
   return (
     <div className={s.headline}>
       <div className={s.balance}>
-        <span>Vesting contract balance:</span>
+        <span>Contract balance:</span>
         {
           isFetching ? (
             <img className={s.spinner} src="/images/svg/16/spinner.svg" alt="" />
           ) : (
             <div>{balance} CPOOL</div>
+          )
+        }
+      </div>
+      <div className={s.balance}>
+        <span>Vested amount:</span>
+        {
+          isFetching ? (
+            <img className={s.spinner} src="/images/svg/16/spinner.svg" alt="" />
+          ) : (
+            <div>{vested} CPOOL</div>
           )
         }
       </div>

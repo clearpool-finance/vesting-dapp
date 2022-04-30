@@ -42,10 +42,15 @@
 .balance {
   display: flex;
   align-items: center;
+  margin-top: 20rem;
   color: #fff;
   font-weight: 600;
   font-size: 20rem;
   line-height: 28rem;
+
+  &:first-child {
+    margin-top: 0;
+  }
 
   span {
     color: #8E9DB1;
