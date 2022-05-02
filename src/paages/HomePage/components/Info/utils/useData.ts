@@ -5,17 +5,6 @@ import { useConnect } from 'web3'
 import { useReducerState } from 'hooks'
 
 
-export type Data = {
-  totalTokens: number
-  alreadyClaimed: number
-  alreadyVested: number
-  availableToClaim: number
-  remainingToVest: number
-  startDate: number
-  cliffDate: number
-  endDate: number
-}
-
 const decimals = 18
 
 const formatValue = (value, decimals) =>
@@ -70,8 +59,8 @@ const getAutoData = async ({ account }) => {
   }))
 }
 
-const getManualData = async ({ account }) => {
-  const vestingContract = getContract('manualVesting')
+const getManualData = async ({ contractName, account }) => {
+  const vestingContract = getContract(contractName)
   const cpoolContract = getContract('cpool')
 
   const [ decimals, info, balance ] = await Promise.all([
@@ -106,26 +95,29 @@ const getManualData = async ({ account }) => {
 
 const useData = () => {
   const { account } = useConnect()
+
   const [ state, setState ] = useReducerState({
     isFetching: true,
     isAutoFetching: false,
     isManualFetching: false,
+    isManual2Fetching: false,
     autoData: null,
     manualData: null,
+    manualData2: null,
   })
 
-  const { isFetching, isAutoFetching, isManualFetching, autoData, manualData } = state
-
   const fetch = async () => {
-    const [ autoData, manualData ] = await Promise.all([
+    const [ autoData, manualData, manualData2 ] = await Promise.all([
       getAutoData({ account }),
-      getManualData({ account }),
+      getManualData({ account, contractName: 'manualVesting' }),
+      getManualData({ account, contractName: 'manualVesting2' }),
     ])
 
     setState({
       isFetching: false,
       autoData,
       manualData,
+      manualData2,
     })
   }
 
@@ -162,22 +154,30 @@ const useData = () => {
   const fetchManualData = async () => {
     setState({ isManualFetching: true })
 
-    const data = await getManualData({ account })
+    const manualData = await getManualData({ account, contractName: 'manualVesting' })
 
     setState({
       isManualFetching: false,
-      manualData: data,
+      manualData,
+    })
+  }
+
+  const fetchManualData2 = async () => {
+    setState({ isManualFetching: true })
+
+    const manualData2 = await getManualData({ account, contractName: 'manualVesting2' })
+
+    setState({
+      isManual2Fetching: false,
+      manualData2,
     })
   }
 
   return {
-    isFetching,
-    isAutoFetching,
-    isManualFetching,
-    autoData,
-    manualData,
+    ...state,
     fetchAutoData,
     fetchManualData,
+    fetchManualData2,
   }
 }
 

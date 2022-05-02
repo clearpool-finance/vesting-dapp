@@ -49,7 +49,7 @@ const useForm = () => {
       setSubmitting(true)
 
       const cpoolContract = getContract('cpool')
-      const vestingContract = getContract('manualVesting', true)
+      const vestingContract = getContract('manualVesting2', true)
 
       let { address, amount, startDate, endDate, cliffDate } = values
 

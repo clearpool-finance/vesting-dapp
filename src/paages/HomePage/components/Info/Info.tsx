@@ -96,20 +96,23 @@ const AutoVesting = ({ isFetching, blocks, onClaim }) => {
   )
 }
 
-const ManualVesting = ({ isFetching, data, onClaim }) => {
+const ManualVesting = ({ isFetching, data, contractName, onClaim }) => {
   const { availableToClaim } = data
 
   return (
     <div className={s.block}>
       <Vesting {...{ isFetching, data, withDates: true, onClaim }} />
-      <ClaimButton {...{ contractName: 'manualVesting', availableToClaim, onClaim }} />
+      <ClaimButton {...{ contractName, availableToClaim, onClaim }} />
     </div>
   )
 }
 
 const Info = () => {
   const { account } = useConnect()
-  const { isFetching, isAutoFetching, isManualFetching, autoData, manualData, fetchAutoData, fetchManualData } = useData()
+  const {
+    isFetching, isAutoFetching, isManualFetching, isManual2Fetching, autoData, manualData, manualData2,
+    fetchAutoData, fetchManualData, fetchManualData2,
+  } = useData()
 
   if (!account) {
     return (
@@ -148,12 +151,23 @@ const Info = () => {
           <ManualVesting
             isFetching={isFetching || isManualFetching}
             data={manualData}
+            contractName="manualVesting"
             onClaim={fetchManualData}
           />
         )
       }
       {
-        !autoData && !manualData && (
+        Boolean(manualData2 && manualData2.totalTokens) && (
+          <ManualVesting
+            isFetching={isFetching || isManual2Fetching}
+            data={manualData2}
+            contractName="manualVesting2"
+            onClaim={fetchManualData2}
+          />
+        )
+      }
+      {
+        !autoData && !manualData && !manualData2 && (
           <div className={s.empty}>Nothing to show</div>
         )
       }

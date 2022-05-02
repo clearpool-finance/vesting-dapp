@@ -1,14 +1,16 @@
-import type { CPOOL, AutoVesting, ManualVesting } from './types'
+import type { CPOOL, AutoVesting, ManualVesting, ManualVesting2 } from './types'
 
 import cpoolAbi from './abis/CPOOL.json'
 import autoVestingAbi from './abis/AutoVesting.json'
 import manualVestingAbi from './abis/ManualVesting.json'
+import manualVesting2Abi from './abis/ManualVesting2.json'
 
 
 export type ContractsAbi = {
   'cpool': CPOOL
   'autoVesting': AutoVesting
   'manualVesting': ManualVesting
+  'manualVesting2': ManualVesting2
 }
 
 export type ContractName = keyof ContractsAbi
@@ -40,6 +42,10 @@ export const contracts: ContractsData = {
   manualVesting: {
     address: process.env.NEXT_PUBLIC_MANUAL_VESTING,
     abi: manualVestingAbi,
+  },
+  manualVesting2: {
+    address: process.env.NEXT_PUBLIC_MANUAL_VESTING_2,
+    abi: manualVesting2Abi,
   },
 }
 

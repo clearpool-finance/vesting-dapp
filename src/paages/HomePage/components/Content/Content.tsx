@@ -14,10 +14,10 @@ const Balance = () => {
 
   const fetch = async () => {
     const cpoolContract = getContract('cpool')
-    const vestingContract = getContract('manualVesting')
+    const vestingContract = getContract('manualVesting2')
 
     const [ balance, totalVest ] = await Promise.all([
-      cpoolContract.balanceOf(contracts.manualVesting.address),
+      cpoolContract.balanceOf(contracts.manualVesting2.address),
       vestingContract.totalVest(),
     ])
 
