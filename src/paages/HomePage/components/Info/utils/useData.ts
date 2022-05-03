@@ -61,21 +61,21 @@ const getAutoData = async ({ account }) => {
 
 const getManualData = async ({ contractName, account }) => {
   const vestingContract = getContract(contractName)
-  const cpoolContract = getContract('cpool')
 
-  const [ decimals, info, balance ] = await Promise.all([
-    cpoolContract.decimals(),
+  const [ info, balance ] = await Promise.all([
     vestingContract.recipients(account),
     vestingContract.getAvailableBalance(account),
   ])
 
+  const cpoolDecimals = 18
+
   const { amount, claimed, vestingBegin, vestingCliff, vestingEnd } = info
 
-  const totalTokens = formatValue(amount, decimals)
-  const alreadyClaimed = formatValue(claimed, decimals)
-  const availableToClaim = formatValue(balance, decimals)
-  const alreadyVested = formatValue(balance.add(claimed), decimals)
-  const remainingToVest = formatValue(amount.sub(balance).sub(claimed), decimals)
+  const totalTokens = formatValue(amount, cpoolDecimals)
+  const alreadyClaimed = formatValue(claimed, cpoolDecimals)
+  const availableToClaim = formatValue(balance, cpoolDecimals)
+  const alreadyVested = formatValue(balance.add(claimed), cpoolDecimals)
+  const remainingToVest = formatValue(amount.sub(balance).sub(claimed), cpoolDecimals)
 
   const startDate = new Date(vestingBegin as any * 1000)
   const cliffDate = new Date(vestingCliff as any * 1000)
